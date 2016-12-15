@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.norm.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.neusoft.norm.domain.Menu">
+        <id column="id" property="id" jdbcType="SMALLINT"/>
+        <result column="name" property="name" jdbcType="CHAR"/>
+        <result column="parentid" property="parentid" jdbcType="SMALLINT"/>
+        <result column="resource" property="resource" jdbcType="CHAR"/>
+        <result column="data" property="data" jdbcType="CHAR"/>
+        <result column="listorder" property="listorder" jdbcType="SMALLINT"/>
+        <result column="display" property="display" jdbcType="CHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, parentid, resource, data, listorder, display
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short">
+        select
+        <include refid="Base_Column_List"/>
+        from t_menu
+        where id = #{id,jdbcType=SMALLINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from t_menu
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+    <insert id="insert" parameterType="com.neusoft.norm.domain.Menu">
+    insert into t_menu (id, name, parentid, 
+      resource, data, listorder, 
+      display)
+    values (#{id,jdbcType=SMALLINT}, #{name,jdbcType=CHAR}, #{parentid,jdbcType=SMALLINT}, 
+      #{resource,jdbcType=CHAR}, #{data,jdbcType=CHAR}, #{listorder,jdbcType=SMALLINT}, 
+      #{display,jdbcType=CHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.neusoft.norm.domain.Menu">
+        insert into t_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="parentid != null">
+                parentid,
+            </if>
+            <if test="resource != null">
+                resource,
+            </if>
+            <if test="data != null">
+                data,
+            </if>
+            <if test="listorder != null">
+                listorder,
+            </if>
+            <if test="display != null">
+                display,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=SMALLINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=CHAR},
+            </if>
+            <if test="parentid != null">
+                #{parentid,jdbcType=SMALLINT},
+            </if>
+            <if test="resource != null">
+                #{resource,jdbcType=CHAR},
+            </if>
+            <if test="data != null">
+                #{data,jdbcType=CHAR},
+            </if>
+            <if test="listorder != null">
+                #{listorder,jdbcType=SMALLINT},
+            </if>
+            <if test="display != null">
+                #{display,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.norm.domain.Menu">
+        update t_menu
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=CHAR},
+            </if>
+            <if test="parentid != null">
+                parentid = #{parentid,jdbcType=SMALLINT},
+            </if>
+            <if test="resource != null">
+                resource = #{resource,jdbcType=CHAR},
+            </if>
+            <if test="data != null">
+                data = #{data,jdbcType=CHAR},
+            </if>
+            <if test="listorder != null">
+                listorder = #{listorder,jdbcType=SMALLINT},
+            </if>
+            <if test="display != null">
+                display = #{display,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=SMALLINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.neusoft.norm.domain.Menu">
+    update t_menu
+    set name = #{name,jdbcType=CHAR},
+      parentid = #{parentid,jdbcType=SMALLINT},
+      resource = #{resource,jdbcType=CHAR},
+      data = #{data,jdbcType=CHAR},
+      listorder = #{listorder,jdbcType=SMALLINT},
+      display = #{display,jdbcType=CHAR}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+
+
+    <select id="selectLeftMenuByParentId" resultMap="SubMenuResultMap" parameterType="java.lang.Integer">
+    SELECT pm.id, pm.name, pm.parentid, pm.resource,
+    sm.id as subMenu_id, sm.name as subMenu_name, sm.resource as subMenu_resource
+    FROM t_menu pm left JOIN  t_menu sm
+    ON sm.parentid = pm.id WHERE pm.display=1 and  pm.parentid = #{pid,jdbcType=INTEGER} order by pm.listorder,sm.listorder
+  </select>
+
+    <select id="selectTopMenu" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_menu
+        where display = 1 and parentid = 0 order by listorder
+    </select>
+
+    <resultMap id="SubMenuResultMap" type="com.neusoft.norm.domain.Menu" extends="BaseResultMap">
+        <collection property="subMenus" ofType="com.neusoft.norm.domain.Menu">
+            <id column="subMenu_id" property="id" jdbcType="INTEGER"/>
+            <result column="subMenu_name" property="name" jdbcType="VARCHAR"/>
+            <result column="subMenu_resource" property="resource" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectDisableMenu" resultType="com.neusoft.norm.domain.Menu" >
+        SELECT   id, name, parentid FROM t_menu WHERE display = 1
+    </select>
+
+</mapper>

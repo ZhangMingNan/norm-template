@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.norm.mapper.AdminRoleMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.norm.domain.AdminRole">
+    <id column="roleid" jdbcType="TINYINT" property="roleid" />
+    <result column="rolename" jdbcType="VARCHAR" property="rolename" />
+    <result column="listorder" jdbcType="SMALLINT" property="listorder" />
+    <result column="disabled" jdbcType="BIT" property="disabled" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    roleid, rolename, listorder, disabled,description
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Byte" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_admin_role
+    where roleid = #{roleid,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
+    delete from t_admin_role
+    where roleid = #{roleid,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="com.neusoft.norm.domain.AdminRole">
+    insert into t_admin_role (roleid, rolename, listorder, 
+      disabled, description)
+    values (#{roleid,jdbcType=TINYINT}, #{rolename,jdbcType=VARCHAR}, #{listorder,jdbcType=SMALLINT}, 
+      #{disabled,jdbcType=BIT}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neusoft.norm.domain.AdminRole">
+    insert into t_admin_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        roleid,
+      </if>
+      <if test="rolename != null">
+        rolename,
+      </if>
+      <if test="listorder != null">
+        listorder,
+      </if>
+      <if test="disabled != null">
+        disabled,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        #{roleid,jdbcType=TINYINT},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="listorder != null">
+        #{listorder,jdbcType=SMALLINT},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.norm.domain.AdminRole">
+    update t_admin_role
+    <set>
+      <if test="rolename != null">
+        rolename = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="listorder != null">
+        listorder = #{listorder,jdbcType=SMALLINT},
+      </if>
+      <if test="disabled != null">
+        disabled = #{disabled,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where roleid = #{roleid,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neusoft.norm.domain.AdminRole">
+    update t_admin_role
+    set rolename = #{rolename,jdbcType=VARCHAR},
+      listorder = #{listorder,jdbcType=SMALLINT},
+      disabled = #{disabled,jdbcType=BIT},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where roleid = #{roleid,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neusoft.norm.domain.AdminRole">
+    update t_admin_role
+    set rolename = #{rolename,jdbcType=VARCHAR},
+      listorder = #{listorder,jdbcType=SMALLINT},
+      disabled = #{disabled,jdbcType=BIT}
+    where roleid = #{roleid,jdbcType=TINYINT}
+  </update>
+
+  <select id="selectDisabledRole" resultType="com.neusoft.norm.domain.AdminRole">
+    select
+    <include refid="Base_Column_List" />
+    from t_admin_role
+    <where >
+      <if test="disabled != -1">
+       disabled = #{disabled,jdbcType=BIT}
+      </if>
+    </where> ORDER BY listorder
+  </select>
+
+  <update id="sorting" parameterType="java.util.List">
+    <foreach collection="roleList" item="role" open="" close=";" separator=";">
+        UPDATE  t_admin_role SET  listorder = #{role.listorder,jdbcType=SMALLINT} WHERE roleid = #{role.roleid,jdbcType=TINYINT}
+    </foreach>
+  </update>
+  
+
+
+</mapper>

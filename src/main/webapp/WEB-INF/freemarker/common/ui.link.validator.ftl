@@ -1,0 +1,2 @@
+<script language="javascript" type="text/javascript" src="${basePath}/statics/js/formvalidator.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="${basePath}/statics/js/formvalidatorregex.js" charset="UTF-8"></script>

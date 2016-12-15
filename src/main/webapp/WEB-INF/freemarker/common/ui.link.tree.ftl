@@ -1,0 +1,2 @@
+<link href="${basePath}/statics/plugin/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${basePath}/statics/plugin/ztree/js/jquery.ztree.all.min.js"></script>
