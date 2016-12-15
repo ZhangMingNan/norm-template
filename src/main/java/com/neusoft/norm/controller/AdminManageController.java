@@ -45,7 +45,7 @@ public class AdminManageController extends BaseController {
         PageInfo<Admin> pageInfo = new PageInfo<>(adminList);
         model.addAttribute("f", f);
         model.addAttribute("pageInfo", pageInfo);
-        return "adminManage/admin_list";
+        return "adminManage/admin-list";
     }
 
     @GetMapping("edit")
@@ -55,7 +55,7 @@ public class AdminManageController extends BaseController {
         Admin admin = adminService.selectAdminByUserId(userid);
         model.addAttribute("admin", admin);
         model.addAttribute("roleList", roleList);
-        return "adminManage/admin_edit";
+        return "adminManage/admin-edit";
     }
 
     @GetMapping("add")
@@ -63,7 +63,7 @@ public class AdminManageController extends BaseController {
     public String add(Integer userid, Model model) {
         List<AdminRole> roleList = roleService.selectDisabledRole(1);
         model.addAttribute("roleList", roleList);
-        return "adminManage/admin_add";
+        return "adminManage/admin-add";
     }
 
     @PostMapping("update")

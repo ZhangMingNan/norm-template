@@ -85,7 +85,7 @@
             当前位置：<span id="current_pos"></span></div>
         <div class="col-1">
             <div class="content" style="position:relative; overflow:hidden">
-                <iframe name="right" id="rightMain" src="/admin/main" frameborder="false" scrolling="auto" style="border:none; margin-bottom:30px" width="100%" height="auto" allowtransparency="true"></iframe>
+                <iframe name="right" id="rightMain" src="/admin/main.html" frameborder="false" scrolling="auto" style="border:none; margin-bottom:30px" width="100%" height="auto" allowtransparency="true"></iframe>
                 <div class="fav-nav">
                     <div id="panellist">
                     </div>
@@ -174,7 +174,7 @@
 
 
         //默认加载第一个菜单
-        $("#leftMain").load("/admin/menuLeft?pid=38");
+        $("#leftMain").load("/admin/menu-left.html?pid=38");
         //面板切换
         $("#btnx").removeClass("btns2");
         $("#Site_model,#btnx h6").css("display","none");
@@ -190,7 +190,7 @@
         $("#bigid").val(menuid);
         $("#paneladd").html('<a class="panel-add" href="javascript:add_panel();"><em>添加</em></a>');
         //$("#rightMain").attr('src', targetUrl);
-        $("#leftMain").load("/admin/menuLeft?pid="+menuid+"&random="+Math.random());
+        $("#leftMain").load("/admin/menu-left.html?pid="+menuid+"&random="+Math.random());
         $('.top_menu').removeClass("on");
         $('#_M'+menuid).addClass("on");
 

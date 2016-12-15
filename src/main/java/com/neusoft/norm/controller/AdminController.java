@@ -86,24 +86,24 @@ public class AdminController extends BaseController {
         return "admin/index";
     }
 
-    @GetMapping("menuLeft")
+    @GetMapping("menu-left.html")
     public String menuLeft(int pid, Model model) {
         List<Menu> menus = adminService.selectLeftMenuByParentId(pid);
         model.addAttribute("menus", menus);
-        return "admin/menu_left";
+        return "admin/menu-left";
     }
 
-    @GetMapping("main")
+    @GetMapping("main.html")
     public String mian(HttpSession session, HttpServletRequest request, Model model) {
-        System.out.println(System.getProperty("system.project_name"));
+
         return "admin/main";
     }
 
-    @GetMapping("closeDialog")
+    @GetMapping("close-dialog.html")
     public String closeDialog(String dialogId, Model model) {
 
         model.addAttribute("dialogId", dialogId);
-        return "/admin/closeDialog";
+        return "/admin/close-dialog";
     }
 
 

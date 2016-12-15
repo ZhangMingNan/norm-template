@@ -58,7 +58,7 @@ public class RoleControler extends BaseController{
     @RequiresPermissions("admin:role:add")
     public String add(HttpSession session, HttpServletRequest request, Model model) {
         model.addAttribute("subnav", 2);
-        return "admin/role_add";
+        return "admin/role-add";
     }
 
     @PostMapping("add")
@@ -78,7 +78,7 @@ public class RoleControler extends BaseController{
     public String edit(Integer roleid,Model model){
         AdminRole role = roleService.selectRoleById(roleid);
         model.addAttribute("role",role);
-        return "admin/role_edit";
+        return "admin/role-edit";
     }
 
     /**
@@ -92,7 +92,7 @@ public class RoleControler extends BaseController{
         roleService.updateRole(role);
 
         attributes.addAttribute("dialogId", "edit_role");
-        return redirect("/admin/closeDialog");
+        return redirect("/admin/close-dialog.html");
     }
 
 
@@ -127,7 +127,7 @@ public class RoleControler extends BaseController{
     public String rolePriv(HttpSession session, HttpServletRequest request, Model model,Integer roleid) {
 
         model.addAttribute("roleid",roleid);
-        return "admin/role_priv";
+        return "admin/role-priv";
     }
 
 
