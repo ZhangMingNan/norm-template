@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.neusoft.norm.domain.Admin;
 import com.neusoft.norm.domain.AdminRole;
 import com.neusoft.norm.domain.Menu;
+import com.neusoft.norm.log.annotations.Log;
 import com.neusoft.norm.mapper.AdminMapper;
 import com.neusoft.norm.mapper.AdminRoleMapper;
 import com.neusoft.norm.mapper.MenuMapper;
@@ -57,6 +58,8 @@ public class AdminServiceImpl  implements AdminService{
         return adminMapper.selectByPrimaryKey(userid);
     }
 
+
+    @Log("更新管理员!")
     @Override
     public void updateAdmin(Admin admin) {
         if (admin!=null){
@@ -69,6 +72,7 @@ public class AdminServiceImpl  implements AdminService{
             }
         }
     }
+
 
     @Override
     public List<Admin> selectAdmins(Admin admin) {
@@ -101,8 +105,10 @@ public class AdminServiceImpl  implements AdminService{
         return adminMapper.findPermissionsByRoleid(roleid);
     }
 
+    @Log("删除管理员!")
     @Override
     public void deleteByUserid(Integer userid) {
+
         adminMapper.deleteByPrimaryKey(userid);
     }
 

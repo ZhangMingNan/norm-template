@@ -37,7 +37,7 @@
         </javaClientGenerator>
 
 
-        <table schema="mybatis" tableName="t_admin_role" domainObjectName="AdminRole"
+        <table schema="mybatis" tableName="t_operation_log" domainObjectName="OperationLog"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

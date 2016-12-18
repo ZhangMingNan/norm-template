@@ -2,14 +2,18 @@ package com.neusoft.norm.controller;
 
 import com.google.common.base.Charsets;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
  * 作者: 张明楠 创建于 16/8/16.
  */
-public class BaseController {
+public class BaseController  {
     public String redirect(String target) {
         return String.format("redirect:%s", target);
     }
