@@ -1,6 +1,9 @@
 package com.neusoft.norm.mapper;
 
 import com.neusoft.norm.domain.OperationLog;
+import com.neusoft.norm.domain.vo.SearchParams;
+
+import java.util.List;
 
 public interface OperationLogMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,6 @@ public interface OperationLogMapper {
     int updateByPrimaryKeyWithBLOBs(OperationLog record);
 
     int updateByPrimaryKey(OperationLog record);
+
+    List<OperationLog> findAll(SearchParams searchParams);
 }

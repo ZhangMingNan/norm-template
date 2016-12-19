@@ -27,7 +27,7 @@
     from t_operation_log
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_operation_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -142,4 +142,38 @@
       method = #{method,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findAll" resultType="com.neusoft.norm.domain.OperationLog">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_operation_log
+    <where>
+      <foreach collection="criterias"  item="criteria" separator="and">
+        ${criteria.property} ${criteria.conjunction} #{criteria.value}
+      </foreach>
+    </where>
+
+  </select>
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

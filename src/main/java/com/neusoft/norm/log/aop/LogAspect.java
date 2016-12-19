@@ -1,17 +1,14 @@
 package com.neusoft.norm.log.aop;
 
-import com.google.common.collect.Lists;
 import com.neusoft.norm.domain.Admin;
 import com.neusoft.norm.log.annotations.Log;
 import com.neusoft.norm.shiro.ShiroUtils;
-import org.apache.commons.collections.ListUtils;
 import org.apache.shiro.subject.Subject;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 /**
  * 作者: 张明楠 创建于 16/12/16.
@@ -45,16 +42,7 @@ public class LogAspect {
         Subject subject = ShiroUtils.getSubject();
         Admin admin = (Admin) subject.getPrincipal();
         loger.writeLog(admin,oname,cname,mname,args);
-        int a = 1/0;
         return point.proceed();
-    }
-
-    public static void main(String[] args) {
-        ArrayList<Integer> a = Lists.newArrayList(1,4);
-        ArrayList<Integer> b = Lists.newArrayList(1,2);
-
-        System.out.println(
-                ListUtils.isEqualList(a,b));
     }
 
     private Method currentMethod(ProceedingJoinPoint joinPoint, String mname) {
@@ -69,9 +57,7 @@ public class LogAspect {
         return resultMethod;
     }
 
-    //public static HttpServletRequest getHttpServletRequest() {
-    //    return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-    //}
+
 
     public Logger getLoger() {
         return loger;

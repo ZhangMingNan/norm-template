@@ -91,7 +91,7 @@ public class RoleControler extends BaseController{
     public String doEdit(AdminRole role,String dialogId,RedirectAttributes attributes){
         roleService.updateRole(role);
 
-        attributes.addAttribute("dialogId", "edit_role");
+        attributes.addAttribute("dialogId", "do_edit_role");
         return redirect("/admin/close-dialog.html");
     }
 

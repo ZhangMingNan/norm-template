@@ -1,7 +1,8 @@
 package com.neusoft.norm.domain;
 
 import java.util.List;
-
+import lombok.ToString;
+@ToString
 public class Menu {
     private Short id;
 

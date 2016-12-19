@@ -9,63 +9,64 @@
     </div>
 </div>
 <form method="post" action="/admin/role/listorders" id="listOrderForm">
-    <div class="table-list pad-lr-10">
-        <table width="100%" cellspacing="0">
-            <thead>
-            <tr>
-                <th align="center">排序</th>
-                <th align="center">ID</th>
-                <th align="center">角色名称</th>
-                <th align="center">角色描述</th>
-                <th align="center">状态</th>
-                <th align="center">管理操作</th>
-            </tr>
-            </thead>
-            <tbody>
-                <#list roleList as role>
-                <tr>
-                    <td align="center">
-                        <input name="listorders[${role_index}].listorder" type="text" size="3"
-                               value="${role.listorder!}" class="input-text-c input-text">
-                        <input type="hidden" name="listorders[${role_index}].roleid" value="${role.roleid!}">
-                    </td>
-                    <td align="center">${role.roleid!}</td>
-                    <td align="center">${role.rolename!}</td>
-                    <td align="center">${role.description!}</td>
-                    <td align="center">
+        <div class="pad_10">
+            <div class="table-list">
+                <table width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th align="center">排序</th>
+                        <th align="center">ID</th>
+                        <th align="center">角色名称</th>
+                        <th align="center">角色描述</th>
+                        <th align="center">状态</th>
+                        <th align="center">管理操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <#list roleList as role>
+                        <tr>
+                            <td align="center">
+                                <input name="listorders[${role_index}].listorder" type="text" size="3"
+                                       value="${role.listorder!}" class="input-text-c input-text">
+                                <input type="hidden" name="listorders[${role_index}].roleid" value="${role.roleid!}">
+                            </td>
+                            <td align="center">${role.roleid!}</td>
+                            <td align="center">${role.rolename!}</td>
+                            <td align="center">${role.description!}</td>
+                            <td align="center">
 
-                        <#if role.disabled == false >
-                            <a href="/admin/role/changeStatus?roleid=${role.roleid!}&disabled=true"> <font color="blue">×</font>
-                            </a>
-                        <#elseif role.disabled == true >
-                            <a href="/admin/role/changeStatus?roleid=${role.roleid!}&disabled=false"><font
-                                    color="red">√</font></a>
-                        </#if>
-                    </td>
-                    <td class="text-c">
-                        <#if role.roleid == 1>
-                        <font color="#cccccc">权限设置</font> |
-                        <font color="#cccccc">栏目权限</font> |
-                            <a href="/admin/manage?roleid=${role.roleid!}">成员管理</a> |
-                        <font color="#cccccc">修改</font> |
-                        <font color="#cccccc">删除</font>
-                        <#else >
-                            <a href="javascript:do_setting_role(${role.roleid!},'${role.rolename!}')">权限设置</a> |
-                            <a href="javascript:void(0)" onclick="do_setting_cat_priv(4, '总编')">栏目权限</a> |
-                            <a href="/admin/manage?roleid=${role.roleid!}">成员管理</a> |
-                            <a href="javascript:do_edit_role(${role.roleid!},'${role.rolename!}')">修改</a> |
-                            <a href="javascript:;" onclick="do_delete(this,${role.roleid!})">删除</a>
-                        </#if>
-                    </td>
-                </tr>
-                </#list>
-            </tbody>
-        </table>
+                                <#if role.disabled == true >
+                                    <a href="/admin/role/changeStatus?roleid=${role.roleid!}&disabled=false"> <font color="blue">×</font>
+                                    </a>
+                                <#elseif role.disabled == false >
+                                    <a href="/admin/role/changeStatus?roleid=${role.roleid!}&disabled=true"><font color="red">√</font></a>
+                                </#if>
+                            </td>
+                            <td class="text-c">
+                                <#if role.roleid == 1>
+                                    <font color="#cccccc">权限设置</font> |
+                                    <font color="#cccccc">栏目权限</font> |
+                                    <a href="/admin/manage?roleid=${role.roleid!}">成员管理</a> |
+                                    <font color="#cccccc">修改</font> |
+                                    <font color="#cccccc">删除</font>
+                                <#else >
+                                    <a href="javascript:do_setting_role(${role.roleid!},'${role.rolename!}')">权限设置</a> |
+                                    <a href="javascript:void(0)" onclick="do_setting_cat_priv(4, '总编')">栏目权限</a> |
+                                    <a href="/admin/manage?roleid=${role.roleid!}">成员管理</a> |
+                                    <a href="javascript:do_edit_role(${role.roleid!},'${role.rolename!}')">修改</a> |
+                                    <a href="javascript:;" onclick="do_delete(this,${role.roleid!})">删除</a>
+                                </#if>
+                            </td>
+                        </tr>
+                        </#list>
+                    </tbody>
+                </table>
 
-    </div>
-    <div class="btn">
-        <input type="submit" class="button" value="排序">
-    </div>
+            </div>
+            <div class="btn">
+                <input type="submit" class="button" value="排序">
+            </div>
+        </div>
 </form>
 
 <script type="text/javascript">

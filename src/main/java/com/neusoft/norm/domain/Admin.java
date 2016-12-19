@@ -1,7 +1,8 @@
 package com.neusoft.norm.domain;
 import java.io.Serializable;
 import java.util.Date;
-
+import lombok.ToString;
+@ToString
 public class Admin  implements Serializable {
     private static final long serialVersionUID = -8959601282655945443L;
 

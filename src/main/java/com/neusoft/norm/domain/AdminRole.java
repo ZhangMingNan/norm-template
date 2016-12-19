@@ -1,5 +1,6 @@
 package com.neusoft.norm.domain;
-
+import lombok.ToString;
+@ToString
 public class AdminRole {
     private Byte roleid;
 

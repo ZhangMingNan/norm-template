@@ -4,6 +4,8 @@
     $(function(){
         $.formValidator.initConfig({autotip:true,formid:"myform",onerror:function(msg){}});
         $("#rolename").formValidator({onshow:"请输入角色名称",onfocus:"角色名称不能为空。"}).inputValidator({min:1,max:999,onerror:"角色名称不能为空。"});
+
+
     })
 </script>
 
@@ -22,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>是否启用</td>
-                    <td><input type="radio" name="disabled" value="0"  checked> 启用  <label><input type="radio" name="disabled" value="1" >禁止</td>
+                    <td><input type="radio" name="disabled" value="0" <#if !role.disabled>checked</#if>> 启用  <label><input type="radio" name="disabled" value="1" <#if role.disabled>checked</#if>>禁止</td>
                 </tr>
                 <tr>
                     <td>排序</td>
@@ -33,6 +35,7 @@
             <div class="bk15"></div>
             <input name="dosubmit" type="submit" value="提交" class="dialog" id="dosubmit">
         </form>
+
 
 
     </div>

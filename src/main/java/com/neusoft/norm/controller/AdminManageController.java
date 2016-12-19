@@ -61,7 +61,7 @@ public class AdminManageController extends BaseController {
     @GetMapping("add")
     @RequiresPermissions("admin:manage:add")
     public String add(Integer userid, Model model) {
-        List<AdminRole> roleList = roleService.selectDisabledRole(1);
+        List<AdminRole> roleList = roleService.selectDisabledRole(0);
         model.addAttribute("roleList", roleList);
         return "adminManage/admin-add";
     }

@@ -11,7 +11,8 @@ ul,ol,li{list-style:none;}
 a{text-decoration:none;}
 a:hover{text-decoration:underline;}
 .white,.white a{color:#fff}.blue,.blue a{color:#004499}.gray4,a.gray4{color:#999}
-.red, .red a, a.red{color:red;}.green{color:#0E774A}
+.red, .red a, a.red{color:red;}.green{color:#0E774
+A}
 select optgroup{color:#CAC8BB;}
 header{ display:block}
 /*通用样式*/

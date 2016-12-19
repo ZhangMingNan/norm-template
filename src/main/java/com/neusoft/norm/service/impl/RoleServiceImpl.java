@@ -7,6 +7,7 @@ import com.neusoft.norm.domain.AdminRole;
 import com.neusoft.norm.domain.AdminRolePriv;
 import com.neusoft.norm.domain.Menu;
 import com.neusoft.norm.domain.vo.PrivTreeNode;
+import com.neusoft.norm.log.annotations.Log;
 import com.neusoft.norm.mapper.AdminRoleMapper;
 import com.neusoft.norm.mapper.AdminRolePrivMapper;
 import com.neusoft.norm.mapper.MenuMapper;
@@ -68,7 +69,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     AdminRolePrivMapper adminRolePrivMapper;
-
+    @Log("修改角色权限")
     @Override
     public void settingPriv(Integer roleid, List<Integer> privList) {
         //首先清空这个角色下的所有权限列表
@@ -84,6 +85,7 @@ public class RoleServiceImpl implements RoleService {
         return adminRoleMapper.selectDisabledRole(disabled);
     }
 
+    @Log("修改角色")
     @Override
     public void updateRole(AdminRole role) {
         adminRoleMapper.updateByPrimaryKeySelective(role);
@@ -94,11 +96,12 @@ public class RoleServiceImpl implements RoleService {
         return adminRoleMapper.selectByPrimaryKey(roleid.byteValue());
     }
 
+    @Log("删除角色")
     @Override
     public void deleteRoleById(Integer roleid) {
         adminRoleMapper.deleteByPrimaryKey(roleid.byteValue());
     }
-
+    @Log("插入角色")
     @Override
     public void addRole(AdminRole role) {
         adminRoleMapper.insert(role);

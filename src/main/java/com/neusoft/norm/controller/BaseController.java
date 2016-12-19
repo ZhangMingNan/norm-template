@@ -1,7 +1,11 @@
 package com.neusoft.norm.controller;
 
 import com.google.common.base.Charsets;
+import com.neusoft.norm.domain.vo.SearchParams;
+import com.neusoft.norm.web.SearchPropertiesEditor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,6 +36,12 @@ public class BaseController  {
             e.printStackTrace();
         }
         return "";
+    }
+
+
+    @InitBinder
+    protected void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.registerCustomEditor(SearchParams.class,new SearchPropertiesEditor());
     }
 
 }

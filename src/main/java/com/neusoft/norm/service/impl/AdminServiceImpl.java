@@ -59,7 +59,7 @@ public class AdminServiceImpl  implements AdminService{
     }
 
 
-    @Log("更新管理员!")
+    @Log("更新管理员")
     @Override
     public void updateAdmin(Admin admin) {
         if (admin!=null){
@@ -105,7 +105,7 @@ public class AdminServiceImpl  implements AdminService{
         return adminMapper.findPermissionsByRoleid(roleid);
     }
 
-    @Log("删除管理员!")
+    @Log("删除管理员")
     @Override
     public void deleteByUserid(Integer userid) {
 

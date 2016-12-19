@@ -1,7 +1,8 @@
 package com.neusoft.norm.domain;
 
 import java.util.Date;
-
+import lombok.ToString;
+@ToString
 public class OperationLog {
     private Integer id;
 
