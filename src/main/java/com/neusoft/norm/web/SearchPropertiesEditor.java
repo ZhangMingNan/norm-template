@@ -1,9 +1,12 @@
 package com.neusoft.norm.web;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.neusoft.norm.domain.vo.Criteria;
 import com.neusoft.norm.domain.vo.SearchParams;
 import com.neusoft.norm.utils.HttpRequestUtils;
+import jodd.util.StringUtil;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.HttpServletRequest;
@@ -16,15 +19,15 @@ import java.util.Map;
  */
 public class SearchPropertiesEditor extends PropertyEditorSupport {
 
-    private static  final String sp  = "search_params-";
+    private static  final String sp  = "sp_";
     private final Map<String,String> map;
     public SearchPropertiesEditor(){
         map = Maps.newHashMap();
         map.put("is","=");
-        map.put("less_than","<");
-        map.put("greater_than",">");
-        map.put("less_than_equal","<=");
-        map.put("greater_than_equals",">=");
+        map.put("lessThan","<");
+        map.put("greaterThan",">");
+        map.put("lessThanEqual","<=");
+        map.put("greaterThanEquals",">=");
         map.put("like","like");
     }
 
@@ -39,16 +42,21 @@ public class SearchPropertiesEditor extends PropertyEditorSupport {
         SearchParams searchParams = (SearchParams) value;
         Enumeration<String> names = request.getParameterNames();
         while (names.hasMoreElements()){
-            String name = names.nextElement();
-            if (StringUtils.startsWith(name,sp)){
+            String inputName = names.nextElement();
+            String inputValue = request.getParameter(inputName);
+            if (StringUtils.startsWith(inputName,sp)&&StringUtils.isNotEmpty(inputValue)){
                 Criteria c = new Criteria();
-                String s = StringUtils.removeStart(name,sp);
-                c.setProperty(StringUtils.substringBefore(s,"-"));
-                c.setValue(request.getParameter(name));
-                c.setConjunction(MapUtils.getString(map,StringUtils.substringAfter(s,"-"),"="));
+                String s = StringUtils.removeStart(inputName,sp);
+                String p = StringUtils.substringBefore(s,"_");
+                c.setProperty(camel2underscore(p));
+                c.setValue(inputValue);
+                String e = StringUtils.substringAfter(s,"_");
+                c.setConjunction(MapUtils.getString(map,e,"="));
+                request.setAttribute(String.format("%s%s_%s",sp,p,e),c.getValue());
                 searchParams.getCriterias().add(c);
             }
         }
+
         super.setValue(searchParams);
     }
 
@@ -57,4 +65,32 @@ public class SearchPropertiesEditor extends PropertyEditorSupport {
         super.setSource(source);
     }
 
+
+    /**
+     * 驼峰转下划线
+     * @param camelName
+     * @return
+     */
+    public String camel2underscore(String camelName){
+        if (StringUtils.isNotBlank(camelName)){
+            char[] chars =  camelName.toCharArray();
+            chars[0] = Character.toUpperCase(chars[0]);
+            camelName  = new String(chars);
+            String regex = "([A-Z][a-z]+)";
+            String replacement = "$1_";
+            String underscoreName = camelName.replaceAll(regex, replacement);
+            underscoreName = underscoreName.toLowerCase().substring(0, underscoreName.length()-1);
+            return underscoreName;
+        }
+        return null;
+    }
+
 }
+
+
+
+
+
+
+
+

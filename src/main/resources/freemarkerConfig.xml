@@ -14,6 +14,7 @@
 
             </map>
         </property>
+
         <property name="freemarkerSettings">
             <props>
                 <prop key="auto_import">"/common/utils.macro.ftl" as utils</prop>

@@ -1,31 +1,35 @@
 <@utils.body>
-<link rel="stylesheet" type="text/css" href="http://localhost/p/statics/js/calendar/jscal2.css"/>
-<link rel="stylesheet" type="text/css" href="http://localhost/p/statics/js/calendar/border-radius.css"/>
-<link rel="stylesheet" type="text/css" href="http://localhost/p/statics/js/calendar/win2k.css"/>
-<script type="text/javascript" src="http://localhost/p/statics/js/calendar/calendar.js"></script>
-<script type="text/javascript" src="http://localhost/p/statics/js/calendar/lang/en.js"></script>
+<link rel="stylesheet" type="text/css" href="${basePath}/statics/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}/statics/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}/statics/js/calendar/win2k.css"/>
+<script type="text/javascript" src="${basePath}/statics/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="${basePath}/statics/js/calendar/lang/en.js"></script>
 <div style="margin-top: 10px;"></div>
 
 <div class="pad_10">
     <form action="/admin/log/list.html" method="get">
         <div class="explain-col search-form">
             调用时间
-            <input type="text" name="search_params-create_time->=" id="start_uploadtime" value="" size="21" class="date" readonly>&nbsp;<script type="text/javascript">
+            <input type="text" name="sp_createTime_greaterThanEquals" id="start_uploadtime" value="${sp_createTime_greaterThanEquals!""}" size="10" class="date" readonly>&nbsp;
+            <script type="text/javascript">
             Calendar.setup({
                 weekNumbers: true,
                 inputField : "start_uploadtime",
                 trigger    : "start_uploadtime",
-                dateFormat: "%Y-%m-%d %H:%M:%S",
-                showTime: true,
+                dateFormat: "%Y-%m-%d",
+                showTime: false,
                 minuteStep: 1,
                 onSelect   : function() {this.hide();}
             });
-        </script>至   <input type="text" name="search_params-create_time-<=" id="end_uploadtime" value="" size="21" class="date" readonly>&nbsp;<script type="text/javascript">
+        </script>
+            至
+            <input type="text" name="sp_createTime_lessThanEqual" id="end_uploadtime" value="${sp_createTime_lessThanEqual!""}" size="10" class="date" readonly>&nbsp;
+            <script type="text/javascript">
             Calendar.setup({
                 weekNumbers: true,
                 inputField : "end_uploadtime",
                 trigger    : "end_uploadtime",
-                dateFormat: "%Y-%m-%d %H:%M:%S",
+                dateFormat: "%Y-%m-%d",
                 showTime: false,
                 minuteStep: 1,
                 onSelect   : function() {this.hide();}
@@ -63,4 +67,7 @@
     </div>
     <#include "/common/ui.pagination.ftl">
 </div>
+<script type="application/javascript" >
+
+</script>
 </@utils.body>
