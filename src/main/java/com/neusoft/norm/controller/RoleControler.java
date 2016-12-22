@@ -153,6 +153,7 @@ public class RoleControler extends BaseController{
      */
     @PostMapping("settingPriv")
     @ResponseBody
+    @RequiresPermissions("admin:role:settingPriv")
     public HttpResult settingPriv(Integer roleid, @RequestParam("privList")ArrayList<Integer> privList){
         roleService.settingPriv(roleid,privList);
         return HttpResult.success();
@@ -165,6 +166,7 @@ public class RoleControler extends BaseController{
      * @return
      */
     @GetMapping("changeStatus")
+    @RequiresPermissions("admin:role:changeStatus")
     public String changeStatus(AdminRole role){
         roleService.updateRole(role);
         return redirectToMsg("/admin/role", "设置成功!");

@@ -34,7 +34,7 @@
             if(data.status == 0){
                 window.location = window.location;
             }else{
-                alert("系统报错!");
+                alert(data.msg);
             }
         },'json')
     }
