@@ -3,6 +3,7 @@ package com.neusoft.norm.mapper;
 import com.neusoft.norm.domain.AdminRolePriv;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface AdminRolePrivMapper {
@@ -21,7 +22,7 @@ public interface AdminRolePrivMapper {
      * @param roleid
      * @param menuList
      */
-    void settingPriv(@Param("roleid")Integer roleid,@Param("menuList") List<Integer> menuList);
+    void settingPriv(@Param("roleid")Integer roleid,@Param("menuList") ArrayList<Integer> menuList);
 
     /**
      * 根据角色ID查询权限列表

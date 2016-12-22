@@ -16,6 +16,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class RoleServiceImpl implements RoleService {
     AdminRolePrivMapper adminRolePrivMapper;
     @Log("修改角色权限")
     @Override
-    public void settingPriv(Integer roleid, List<Integer> privList) {
+    public void settingPriv(Integer roleid, ArrayList<Integer> privList) {
         //首先清空这个角色下的所有权限列表
         adminRolePrivMapper.deleteRolePrivByRoleId(roleid);
         if (!CollectionUtils.isEmpty(privList)) {

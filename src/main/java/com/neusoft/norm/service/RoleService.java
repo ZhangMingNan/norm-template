@@ -3,6 +3,7 @@ package com.neusoft.norm.service;
 import com.neusoft.norm.domain.AdminRole;
 import com.neusoft.norm.domain.vo.PrivTreeNode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface RoleService {
     List<PrivTreeNode> rolePrivById(Integer roleId);
-    void settingPriv(Integer roleId, List<Integer> privList);
+    void settingPriv(Integer roleId, ArrayList<Integer> privList);
 
     List<AdminRole> selectDisabledRole(int disabled);
 

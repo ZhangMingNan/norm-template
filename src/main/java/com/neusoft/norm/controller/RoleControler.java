@@ -6,6 +6,7 @@ import com.neusoft.norm.domain.vo.PrivTreeNode;
 import com.neusoft.norm.domain.vo.RoleListOrderVO;
 import com.neusoft.norm.service.AdminService;
 import com.neusoft.norm.service.RoleService;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -151,7 +153,7 @@ public class RoleControler extends BaseController{
      */
     @PostMapping("settingPriv")
     @ResponseBody
-    public HttpResult settingPriv(Integer roleid, @RequestParam("privList")List<Integer> privList){
+    public HttpResult settingPriv(Integer roleid, @RequestParam("privList")ArrayList<Integer> privList){
         roleService.settingPriv(roleid,privList);
         return HttpResult.success();
     }
