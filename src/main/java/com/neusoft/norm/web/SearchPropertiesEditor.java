@@ -40,6 +40,7 @@ public class SearchPropertiesEditor extends PropertyEditorSupport {
     public void setValue(Object value) {
         HttpServletRequest request = HttpRequestUtils.getHttpServletRequest();
         SearchParams searchParams = (SearchParams) value;
+        StringBuilder sb = new StringBuilder();
         Enumeration<String> names = request.getParameterNames();
         while (names.hasMoreElements()){
             String inputName = names.nextElement();
@@ -54,9 +55,10 @@ public class SearchPropertiesEditor extends PropertyEditorSupport {
                 c.setConjunction(MapUtils.getString(map,e,"="));
                 request.setAttribute(String.format("%s%s_%s",sp,p,e),c.getValue());
                 searchParams.getCriterias().add(c);
+                sb.append("&"+inputName+"="+c.getValue());
             }
         }
-
+        request.setAttribute("currentParams",sb.toString());
         super.setValue(searchParams);
     }
 

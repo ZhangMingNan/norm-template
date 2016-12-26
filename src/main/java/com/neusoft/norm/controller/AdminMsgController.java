@@ -17,9 +17,10 @@ public class AdminMsgController extends BaseController {
      * @return
      */
     @GetMapping("info.html")
-    public String msg(String msg,String url, Model model)   {
+    public String msg(String callback,String msg,String url, Model model)   {
         model.addAttribute("msg", msg);
         model.addAttribute("url", url);
+        model.addAttribute("callback", callback);
         return "/admin/msg";
     }
 

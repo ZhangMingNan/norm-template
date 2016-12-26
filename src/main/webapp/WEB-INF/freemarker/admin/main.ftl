@@ -21,7 +21,7 @@
     <div class="col-2 col-auto">
         <h6>系统信息</h6>
         <div class="content">
-            程序版本：华募众筹 V9.6.0 [<a href="" target="_blank">查看最新版本</a>]<br />
+            程序版本：空中金融 V1.0.1 [<a href="" target="_blank">查看最新版本</a>]<br />
         </div>
     </div>
     <div class="bk10"></div>

@@ -1,17 +1,9 @@
 package com.neusoft.norm.mapper;
 
 import com.neusoft.norm.domain.Dict;
+import org.apache.ibatis.annotations.Param;
 
 public interface DictMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Dict record);
-
-    int insertSelective(Dict record);
-
-    Dict selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Dict record);
-
-    int updateByPrimaryKey(Dict record);
+    Dict findByTypeAndValue(@Param("type")String type, @Param("value")String value);
 }

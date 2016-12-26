@@ -51,14 +51,13 @@
         </div>
     </div>
     <div class="col-auto">
-        <div class="log white cut_line">您好！华募众筹  [超级管理员]<span>|</span><a href="/admin/logout.html">[退出]</a><span>|</span>
-            <a href="" target="_blank" id="site_homepage">站点首页</a><span>|</span>
-            <a href="?m=member" target="_blank">会员中心</a><span>|</span>
-            <a href="?m=search" target="_blank" id="site_search">搜索</a>
+        <div class="log white cut_line">您好:[${admin.username!""}]<span>|</span><a href="/admin/logout.html">[退出]</a><span>|</span>
+            <a href="http://jr.kongzhong.com" target="_blank" id="site_homepage">站点首页</a><span>|</span>
+            <a href="http://www.baidu.com" target="_blank" id="site_search">搜索</a>
         </div>
         <ul class="nav white" id="top_menu">
             <#list topMenus as topM >
-                <li id="_M${topM.id}" class="<#if topM.id == 38 > on top_menu <#else> top_menu  </#if>"><a href="javascript:_M(${topM.id},'${topM.resource}')" hidefocus="true" style="outline:none;">${topM.name}</a></li>
+                <li id="_M${topM.id}" class="<#if topM.id == 1 > on top_menu <#else> top_menu  </#if>"><a href="javascript:_M(${topM.id},'${topM.resource}')" hidefocus="true" style="outline:none;">${topM.name}</a></li>
             </#list>
         </ul>
     </div>

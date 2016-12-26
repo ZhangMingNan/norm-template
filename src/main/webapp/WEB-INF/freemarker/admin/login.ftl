@@ -39,11 +39,6 @@
             $(function(){
                 $('#username').focus();
             })
-
-            //如果登录页面被嵌套则刷新父页面.
-            if(top!=self){
-                parent.location.reload();
-            }
         </script>
     </div>
     <div class="login_box_bot"></div>

@@ -27,6 +27,9 @@ public class BaseController  {
         return String.format("redirect:/msg/info.html?msg=%s&url=%s", encode(msg), encode(url));
     }
 
+    protected String redirectAndClose(String id) {
+        return String.format("redirect:/msg/info.html?callback=close_dialog(\""+id+"\")");
+    }
 
     protected String encode(String string) {
         if (StringUtils.isBlank(string)) return "";

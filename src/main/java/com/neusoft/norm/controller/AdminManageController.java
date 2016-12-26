@@ -6,6 +6,7 @@ import com.neusoft.norm.domain.Admin;
 import com.neusoft.norm.domain.AdminRole;
 import com.neusoft.norm.domain.result.HttpResult;
 import com.neusoft.norm.domain.vo.PageRequest;
+import com.neusoft.norm.domain.vo.SearchParams;
 import com.neusoft.norm.service.AdminService;
 import com.neusoft.norm.service.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -39,8 +40,8 @@ public class AdminManageController extends BaseController {
      */
     @GetMapping
     @RequiresPermissions("admin:manage:list")
-    public String list(Admin admin, PageRequest pageRequest, Model model, @RequestParam(defaultValue = "0") Integer f) {
-        PageHelper.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+    public String list(Admin admin, SearchParams searchParams, Model model, @RequestParam(defaultValue = "0") Integer f) {
+        PageHelper.startPage(searchParams.getPageRequest().getPageNum(),searchParams.getPageRequest().getPageSize());
         List<Admin> adminList = adminService.selectAdmins(admin);
         PageInfo<Admin> pageInfo = new PageInfo<>(adminList);
         model.addAttribute("f", f);
@@ -51,7 +52,7 @@ public class AdminManageController extends BaseController {
     @GetMapping("edit")
     @RequiresPermissions("admin:manage:edit")
     public String edit(Integer userid, Model model) {
-        List<AdminRole> roleList = roleService.selectDisabledRole(1);
+        List<AdminRole> roleList = roleService.selectDisabledRole(0);
         Admin admin = adminService.selectAdminByUserId(userid);
         model.addAttribute("admin", admin);
         model.addAttribute("roleList", roleList);
@@ -70,11 +71,8 @@ public class AdminManageController extends BaseController {
     @RequiresPermissions("admin:manage:update")
     public String updateAdmin(Admin admin, final RedirectAttributes attributes) {
         adminService.updateAdmin(admin);
-        if (admin != null) {
-            attributes.addAttribute("dialogId", admin.getUserid() == null ? "add" : "edit");
-        }
         //提交表单后重定向到列表页
-        return redirect("/admin/manage");
+        return redirectAndClose(admin.getUserid() == null ? "add" : "edit");
     }
 
 

@@ -17,6 +17,7 @@
 
     </div>
 </div>
+<#--<@dict key="article_type.1" />-->
 
 <div class="table-list pad-lr-10">
     <table width="100%" cellspacing="0">
@@ -64,7 +65,6 @@
             </#list>
         </tbody>
     </table>
-
     <#include "/common/ui.pagination.ftl">
 </div>
 

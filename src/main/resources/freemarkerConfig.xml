@@ -6,12 +6,17 @@
 
     <context:property-placeholder location="classpath*:/system.properties" ignore-resource-not-found="false" ignore-unresolvable="true" />
 
+
+    <bean id="valueByKeyDirective" class="com.neusoft.norm.ui.directive.ValueByKeyDirective" />
+    <bean id="dictDirective" class="com.neusoft.norm.ui.directive.DictDirective" />
+
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/freemarker"/>
         <property name="freemarkerVariables">
             <map>
                 <entry key="title" value="后台管理系统模板"/>
-
+                <entry key="valueByKey" value-ref="valueByKeyDirective" />
+                <entry key="dict" value-ref="dictDirective" />
             </map>
         </property>
 

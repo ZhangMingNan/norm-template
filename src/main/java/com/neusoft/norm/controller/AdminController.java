@@ -1,5 +1,6 @@
 package com.neusoft.norm.controller;
 
+import com.neusoft.norm.domain.Admin;
 import com.neusoft.norm.domain.Menu;
 import com.neusoft.norm.domain.result.HttpResult;
 import com.neusoft.norm.service.AdminService;
@@ -82,13 +83,16 @@ public class AdminController extends BaseController {
 
     @RequestMapping
     public String index(HttpSession session, HttpServletRequest request, Model model) {
-        model.addAttribute("topMenus", adminService.selectTopMenu());
+        Admin admin = (Admin)ShiroUtils.getSubject().getPrincipal();
+        model.addAttribute("topMenus", adminService.selectTopMenu(admin.getRoleid()));
+        model.addAttribute("admin",admin);
         return "admin/index";
     }
 
     @GetMapping("menu-left.html")
     public String menuLeft(int pid, Model model) {
-        List<Menu> menus = adminService.selectLeftMenuByParentId(pid);
+        Admin admin = (Admin)ShiroUtils.getSubject().getPrincipal();
+        List<Menu> menus = adminService.selectLeftMenuByParentId(pid,admin.getRoleid());
         model.addAttribute("menus", menus);
         return "admin/menu-left";
     }

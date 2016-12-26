@@ -19,7 +19,7 @@ public interface MenuMapper {
 
     List<Menu> selectLeftMenuByParentId(int pid);
 
-    List<Menu> selectTopMenu();
+    List<Menu> selectTopMenu(Short roleid);
 
     List<Menu> selectDisableMenu();
 }

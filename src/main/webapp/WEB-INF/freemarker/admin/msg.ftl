@@ -23,18 +23,19 @@
 <body>
 <div class="showMsg" style="text-align:center">
     <h5>提示信息</h5>
-    <div class="content guery" style="display:inline-block;display:-moz-inline-stack;zoom:1;*display:inline;max-width:330px">${msg}</div>
+    <div class="content guery" style="display:inline-block;display:-moz-inline-stack;zoom:1;*display:inline;max-width:330px">${msg!""}</div>
     <div class="bottom">
-        <a href="${url}">如果您的浏览器没有自动跳转，请点击这里</a>
-        <script language="javascript">setTimeout("redirect('${url}');",1250);</script>
+        <a href="${url!""}">如果您的浏览器没有自动跳转，请点击这里</a>
+        <script language="javascript">setTimeout("redirect('${url!""}');",1250);</script>
     </div>
 </div>
 <script style="text/javascript">
     function close_dialog(id) {
+
         window.top.right.location.reload();window.top.art.dialog({id:id}).close();
     }
     //关闭对话框
-    /*$!msg.callback*/
+    ${callback!""}
 
 </script>
 </body>
