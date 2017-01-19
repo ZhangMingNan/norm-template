@@ -5,4 +5,15 @@
   <select id="findByTypeAndValue" resultType="com.neusoft.norm.domain.Dict">
     SELECT label FROM t_dict WHERE type = #{type} and value = #{value};
   </select>
+    <select id="findAll" resultType="com.neusoft.norm.domain.Dict">
+      select
+      id,value,label,type,description,sort,parentid,remarks,status
+      from t_dict
+      <where>
+        <foreach collection="criterias"  item="criteria" separator="and">
+          ${criteria.property} ${criteria.conjunction} #{criteria.value}
+        </foreach>
+      </where>
+
+    </select>
 </mapper>
