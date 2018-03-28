@@ -11,13 +11,14 @@ public class AdminMsgController extends BaseController {
 
     /**
      * 操作成功消息页面
+     *
      * @param msg
      * @param url
      * @param model
      * @return
      */
     @GetMapping("info.html")
-    public String msg(String callback,String msg,String url, Model model)   {
+    public String msg(String callback, String msg, String url, Model model) {
         model.addAttribute("msg", msg);
         model.addAttribute("url", url);
         model.addAttribute("callback", callback);

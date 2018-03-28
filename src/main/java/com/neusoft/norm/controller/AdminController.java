@@ -31,15 +31,17 @@ public class AdminController extends BaseController {
 
     /**
      * 权限拒绝页面
+     *
      * @return
      */
     @GetMapping("unauthorized.html")
-    public String unauthorized(){
+    public String unauthorized() {
         return "/admin/unauthorized";
     }
 
     /**
      * 后台登录页面
+     *
      * @param request
      * @param username
      * @param password
@@ -52,7 +54,7 @@ public class AdminController extends BaseController {
     }
 
     @GetMapping("logout.html")
-    public String logout(){
+    public String logout() {
         Subject subject = ShiroUtils.getSubject();
         subject.logout();
         return redirect("/admin/login.html");
@@ -60,7 +62,7 @@ public class AdminController extends BaseController {
 
 
     @PostMapping("login.do")
-    public String loginDo(String username, String password) {
+    public String doLogin(String username, String password) {
         try {
             Subject subject = ShiroUtils.getSubject();
             //sha256加密
@@ -68,38 +70,37 @@ public class AdminController extends BaseController {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             subject.login(token);
         } catch (UnknownAccountException e) {
-            return redirectToMsg("/admin/login.html",e.getMessage());
+            return redirectToMsg("/admin/login.html", e.getMessage());
         } catch (IncorrectCredentialsException e) {
-            return redirectToMsg("/admin/login.html",e.getMessage());
+            return redirectToMsg("/admin/login.html", e.getMessage());
         } catch (LockedAccountException e) {
-            return redirectToMsg("/admin/login.html",e.getMessage());
+            return redirectToMsg("/admin/login.html", e.getMessage());
         } catch (AuthenticationException e) {
-            return redirectToMsg("/admin/login.html",e.getMessage());
+            return redirectToMsg("/admin/login.html", e.getMessage());
         }
 
-        return redirectToMsg("/admin","登录成功!");
+        return redirectToMsg("/admin", "登录成功!");
     }
 
 
     @RequestMapping
     public String index(HttpSession session, HttpServletRequest request, Model model) {
-        Admin admin = (Admin)ShiroUtils.getSubject().getPrincipal();
+        Admin admin = (Admin) ShiroUtils.getSubject().getPrincipal();
         model.addAttribute("topMenus", adminService.selectTopMenu(admin.getRoleid()));
-        model.addAttribute("admin",admin);
+        model.addAttribute("admin", admin);
         return "admin/index";
     }
 
     @GetMapping("menu-left.html")
     public String menuLeft(int pid, Model model) {
-        Admin admin = (Admin)ShiroUtils.getSubject().getPrincipal();
-        List<Menu> menus = adminService.selectLeftMenuByParentId(pid,admin.getRoleid());
+        Admin admin = (Admin) ShiroUtils.getSubject().getPrincipal();
+        List<Menu> menus = adminService.selectLeftMenuByParentId(pid, admin.getRoleid());
         model.addAttribute("menus", menus);
         return "admin/menu-left";
     }
 
     @GetMapping("main.html")
-    public String mian(HttpSession session, HttpServletRequest request, Model model) {
-
+    public String mian() {
         return "admin/main";
     }
 
@@ -121,9 +122,9 @@ public class AdminController extends BaseController {
     @ResponseBody
     public HttpResult currentPos(@RequestParam(defaultValue = "0") Integer menuId) {
         String pos = adminService.currentPos(menuId);
-        HttpResult result =  HttpResult.success();
-        result.setData(StringUtils.removeEnd(pos,">"));
-        return  result;
+        HttpResult result = HttpResult.success();
+        result.setData(StringUtils.removeEnd(pos, ">"));
+        return result;
     }
 
 }
