@@ -3,7 +3,9 @@ package com.neusoft.norm.domain.vo;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import lombok.Data;
 import lombok.ToString;
+
 /**
  * 作者: 张明楠 创建于 16/12/19.
  */

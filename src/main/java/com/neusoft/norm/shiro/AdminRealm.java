@@ -33,20 +33,17 @@ public class AdminRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
         Admin admin = (Admin) principalCollection.getPrimaryPrincipal();
-        Set<String> permissions = Sets.newHashSet();
+        Set<String> permissionsSet = Sets.newHashSet();
         List<String> permissionsList = adminService.findPermissionsByRoleid(admin.getRoleid().intValue());
         //根据这个用户获取权限标记集合
-        for (int i = 0; i < permissionsList.size(); i++) {
-            String p = StringUtils.trim(permissionsList.get(i));
-            if (StringUtils.isNotEmpty(p)) {
-                String[] split = StringUtils.split(p, ",");
-                for (int j = 0; j < split.length; j++) {
-                    permissions.add(split[j]);
-                }
+        for (String permissions : permissionsList) {
+            if (StringUtils.isNotEmpty(permissions)) {
+                String[] split = StringUtils.split(permissions, ",");
+                permissionsSet.addAll(Sets.newHashSet(split));
             }
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.setStringPermissions(permissions);
+        info.setStringPermissions(permissionsSet);
         return info;
     }
 

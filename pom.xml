@@ -307,7 +307,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.6.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -316,7 +316,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.10.v20150310</version>
+                <version>9.4.6.v20170531</version>
             </plugin>
             <!-- Mybatis 生成工具插件  -->
             <plugin>
@@ -335,6 +335,7 @@
     <developers>
         <developer>
             <id>qq:1007350771</id>
+            <organizationUrl>https://github.com/ZhangMingNan</organizationUrl>
             <name>张明楠</name>
             <email>origin_zmn@163.com</email>
             <roles>

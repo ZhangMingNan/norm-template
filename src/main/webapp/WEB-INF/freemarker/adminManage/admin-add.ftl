@@ -12,7 +12,7 @@
 </script>
 <div class="subnav">
     <div class="content-menu ib-a blue line-x">
-        <a href='/admin/manage?f=1' ><em>管理员管理</em></a>
+        <a href='/admin/manage/list.html?f=1' ><em>管理员管理</em></a>
         <span>|</span>
         <a href='javascript:;' class="on"><em>添加管理员</em></a>    </div>
 </div>

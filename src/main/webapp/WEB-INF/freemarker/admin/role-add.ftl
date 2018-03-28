@@ -10,7 +10,7 @@
 <#--表格头部子导航-->
 <div class="subnav">
     <div class="content-menu ib-a line-x">
-        <a href="<#if subnav == 1>javascript:;<#else>/admin/role</#if>" class="<#if subnav == 1>on</#if>"><em>角色管理</em></a>
+        <a href="<#if subnav == 1>javascript:;<#else>/admin/role/list.html</#if>" class="<#if subnav == 1>on</#if>"><em>角色管理</em></a>
         <span>|</span>
         <a href="<#if subnav == 2>javascript:;<#else>/admin/role/add</#if>" class="<#if subnav == 2>on</#if>"><em>添加角色</em></a>
     </div>

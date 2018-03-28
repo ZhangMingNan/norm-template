@@ -32,7 +32,7 @@ public class BaseController  {
     }
 
     protected String encode(String string) {
-        if (StringUtils.isBlank(string)) return "";
+        if (StringUtils.isBlank(string)) return StringUtils.EMPTY;
         try {
             return URLEncoder.encode(string, Charsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException e) {

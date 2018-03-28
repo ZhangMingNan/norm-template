@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("admin/role")
-public class RoleControler extends BaseController{
+public class RoleControler extends BaseController {
     @Autowired
     private AdminService adminService;
 
@@ -32,18 +32,18 @@ public class RoleControler extends BaseController{
 
     /**
      * 角色管理列表
+     *
      * @param session
      * @param request
      * @param model
      * @return
      */
-    @GetMapping
+    @GetMapping("list.html")
     @RequiresPermissions("admin:role:list")
     public String role(HttpSession session, HttpServletRequest request, Model model) {
         model.addAttribute("subnav", 1);
         List<AdminRole> roleList = roleService.selectDisabledRole(-1);
         model.addAttribute("roleList", roleList);
-
         return "admin/role";
     }
 
@@ -64,32 +64,35 @@ public class RoleControler extends BaseController{
 
     @PostMapping("add")
     @RequiresPermissions("admin:role:add")
-    public String doAdd(AdminRole role){
+    public String doAdd(AdminRole role) {
         roleService.addRole(role);
-        return  redirect("/admin/role");
+        //重定向到角色列表
+        return redirect("/admin/role/list.html");
     }
 
     /**
      * 修改角色内容
+     *
      * @param roleid
      * @return
      */
     @GetMapping("edit")
     @RequiresPermissions("admin:role:edit")
-    public String edit(Integer roleid,Model model){
+    public String edit(Integer roleid, Model model) {
         AdminRole role = roleService.selectRoleById(roleid);
-        model.addAttribute("role",role);
+        model.addAttribute("role", role);
         return "admin/role-edit";
     }
 
     /**
      * 保存角色修改信息
+     *
      * @param role
      * @return
      */
     @PostMapping("edit")
     @RequiresPermissions("admin:role:edit")
-    public String doEdit(AdminRole role,String dialogId,RedirectAttributes attributes){
+    public String doEdit(AdminRole role, String dialogId, RedirectAttributes attributes) {
         roleService.updateRole(role);
 
         attributes.addAttribute("dialogId", "do_edit_role");
@@ -99,21 +102,23 @@ public class RoleControler extends BaseController{
 
     /**
      * 删除角色
+     *
      * @param roleid
      * @return
      */
     @GetMapping("delete")
     @ResponseBody
     @RequiresPermissions("admin:role:delete")
-    public HttpResult delete(Integer roleid){
+    public HttpResult delete(Integer roleid) {
 
         roleService.deleteRoleById(roleid);
-        return  HttpResult.success();
+        return HttpResult.success();
     }
 
 
     /**
      * 执行页面排序操作
+     *
      * @param vo
      * @return
      */
@@ -125,46 +130,49 @@ public class RoleControler extends BaseController{
     }
 
     @GetMapping("priv")
-    public String rolePriv(HttpSession session, HttpServletRequest request, Model model,Integer roleid) {
+    public String rolePriv(HttpSession session, HttpServletRequest request, Model model, Integer roleid) {
 
-        model.addAttribute("roleid",roleid);
+        model.addAttribute("roleid", roleid);
         return "admin/role-priv";
     }
 
 
     /**
      * 根据角色ID获取权限数据
+     *
      * @param roleid
      * @return
      */
     @GetMapping("privData")
     @ResponseBody
-    public List<PrivTreeNode> rolePrivData(Integer roleid){
+    public List<PrivTreeNode> rolePrivData(Integer roleid) {
         List<PrivTreeNode> menus = roleService.rolePrivById(roleid);
-        return  menus;
+        return menus;
     }
 
     /**
      * 根据角色ID设置权限列表
+     *
      * @param roleid
      * @param privList
      * @return
      */
     @PostMapping("settingPriv")
     @ResponseBody
-    public HttpResult settingPriv(Integer roleid, @RequestParam("privList")ArrayList<Integer> privList){
-        roleService.settingPriv(roleid,privList);
+    public HttpResult settingPriv(Integer roleid, @RequestParam("privList") ArrayList<Integer> privList) {
+        roleService.settingPriv(roleid, privList);
         return HttpResult.success();
     }
 
 
     /**
      * 改变角色可用状态
+     *
      * @param role
      * @return
      */
     @GetMapping("changeStatus")
-    public String changeStatus(AdminRole role){
+    public String changeStatus(AdminRole role) {
         roleService.updateRole(role);
         return redirectToMsg("/admin/role", "设置成功!");
     }

@@ -173,7 +173,7 @@
 
 
         //默认加载第一个菜单
-        $("#leftMain").load("/admin/menu-left.html?pid=38");
+        $("#leftMain").load("/admin/menu-left.html?pid=0");
         //面板切换
         $("#btnx").removeClass("btns2");
         $("#Site_model,#btnx h6").css("display","none");

@@ -2,7 +2,7 @@
 <#--表格头部子导航-->
 <div class="subnav">
     <div class="content-menu ib-a line-x">
-        <a href="<#if subnav == 1>javascript:;<#else>/admin/role</#if>" class="<#if subnav == 1>on</#if>"><em>角色管理</em></a>
+        <a href="<#if subnav == 1>javascript:;<#else>/admin/role/list.html</#if>" class="<#if subnav == 1>on</#if>"><em>角色管理</em></a>
         <span>|</span>
         <a href="<#if subnav == 2>javascript:;<#else>/admin/role/add</#if>"
            class="<#if subnav == 2>on</#if>"><em>添加角色</em></a>
@@ -46,13 +46,13 @@
                                 <#if role.roleid == 1>
                                     <font color="#cccccc">权限设置</font> |
                                     <font color="#cccccc">栏目权限</font> |
-                                    <a href="/admin/manage?roleid=${role.roleid!}">成员管理</a> |
+                                    <a href="/admin/manage/list.html?roleid=${role.roleid!}">成员管理</a> |
                                     <font color="#cccccc">修改</font> |
                                     <font color="#cccccc">删除</font>
                                 <#else >
                                     <a href="javascript:do_setting_role(${role.roleid!},'${role.rolename!}')">权限设置</a> |
                                     <a href="javascript:void(0)" onclick="do_setting_cat_priv(4, '总编')">栏目权限</a> |
-                                    <a href="/admin/manage?roleid=${role.roleid!}">成员管理</a> |
+                                    <a href="/admin/manage/list.html?roleid=${role.roleid!}">成员管理</a> |
                                     <a href="javascript:do_edit_role(${role.roleid!},'${role.rolename!}')">修改</a> |
                                     <a href="javascript:;" onclick="do_delete(this,${role.roleid!})">删除</a>
                                 </#if>

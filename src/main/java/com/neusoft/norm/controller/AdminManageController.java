@@ -38,7 +38,7 @@ public class AdminManageController extends BaseController {
      * @param model
      * @return
      */
-    @GetMapping
+    @GetMapping("list.html")
     @RequiresPermissions("admin:manage:list")
     public String list(Admin admin, SearchParams searchParams, Model model, @RequestParam(defaultValue = "0") Integer f) {
         PageHelper.startPage(searchParams.getPageRequest().getPageNum(),searchParams.getPageRequest().getPageSize());
