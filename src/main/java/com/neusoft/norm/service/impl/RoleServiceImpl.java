@@ -69,7 +69,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Autowired
-    AdminRolePrivMapper adminRolePrivMapper;
+    private AdminRolePrivMapper adminRolePrivMapper;
     @Log("修改角色权限")
     @Override
     public void settingPriv(Integer roleid, ArrayList<Integer> privList) {

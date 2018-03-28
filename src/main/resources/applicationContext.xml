@@ -63,7 +63,7 @@
     <bean id="logAspect" class="com.neusoft.norm.log.aop.LogAspect">
         <property name="loger">
             <!--将日志写入到数据库中-->
-        <bean class="com.neusoft.norm.log.DbLoger" />
+            <bean class="com.neusoft.norm.log.DbLoger"/>
         </property>
     </bean>
     <aop:config>

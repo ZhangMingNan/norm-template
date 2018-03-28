@@ -1,12 +1,23 @@
 package com.neusoft.norm.domain;
+
 import lombok.ToString;
+
 @ToString
 public class AdminRolePriv {
+    private Integer id;
     private Byte roleid;
 
     private Integer menuid;
 
     private String data;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Byte getRoleid() {
         return roleid;
