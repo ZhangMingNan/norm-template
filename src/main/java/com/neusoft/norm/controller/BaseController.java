@@ -22,7 +22,6 @@ public class BaseController {
         return String.format("redirect:%s", target);
     }
 
-    //操作成功后显示消息提示页面,
     protected String redirectToMsg(String url, String msg) {
         return String.format("redirect:/msg/info.html?msg=%s&url=%s", encode(msg), encode(url));
     }
@@ -38,7 +37,6 @@ public class BaseController {
         try {
             return URLEncoder.encode(string, Charsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
         return StringUtils.EMPTY;
     }

@@ -32,12 +32,6 @@ public class AdminManageController extends BaseController {
     @Autowired
     private RoleService roleService;
 
-    /**
-     * 角色成员管理
-     *
-     * @param model
-     * @return
-     */
     @GetMapping("list.html")
     @RequiresPermissions("admin:manage:list")
     public String list(Admin admin, SearchParams searchParams, Model model, @RequestParam(defaultValue = "0") Integer f) {
@@ -69,17 +63,16 @@ public class AdminManageController extends BaseController {
 
     @PostMapping("update")
     @RequiresPermissions("admin:manage:update")
-    public String updateAdmin(Admin admin, final RedirectAttributes attributes) {
+    public String updateAdmin(Admin admin) {
         adminService.updateAdmin(admin);
         //提交表单后重定向到列表页
         return redirectAndClose(admin.getUserid() == null ? "add" : "edit");
     }
 
-
     @GetMapping("delete")
     @ResponseBody
     @RequiresPermissions("admin:manage:delete")
-    public HttpResult doDelete(Integer userid, Model model) {
+    public HttpResult doDelete(Integer userid) {
         adminService.deleteByUserid(userid);
         return HttpResult.success();
     }

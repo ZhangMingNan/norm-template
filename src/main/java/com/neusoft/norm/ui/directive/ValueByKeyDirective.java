@@ -20,7 +20,7 @@ import java.util.Map;
 public class ValueByKeyDirective implements TemplateDirectiveModel {
 
     @Autowired
-    CommonMapper commonMapper;
+    private CommonMapper commonMapper;
 
     @Override
     public void execute(Environment environment, Map map, TemplateModel[] templateModels, TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
