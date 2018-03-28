@@ -41,12 +41,12 @@ public class AdminManageController extends BaseController {
     @GetMapping("list.html")
     @RequiresPermissions("admin:manage:list")
     public String list(Admin admin, SearchParams searchParams, Model model, @RequestParam(defaultValue = "0") Integer f) {
-        PageHelper.startPage(searchParams.getPageRequest().getPageNum(),searchParams.getPageRequest().getPageSize());
+        PageHelper.startPage(searchParams.getPageRequest().getPageNum(), searchParams.getPageRequest().getPageSize());
         List<Admin> adminList = adminService.selectAdmins(admin);
         PageInfo<Admin> pageInfo = new PageInfo<>(adminList);
         model.addAttribute("f", f);
         model.addAttribute("pageInfo", pageInfo);
-        return "adminManage/admin-list";
+        return "admin-manage/admin-list";
     }
 
     @GetMapping("edit")
@@ -56,7 +56,7 @@ public class AdminManageController extends BaseController {
         Admin admin = adminService.selectAdminByUserId(userid);
         model.addAttribute("admin", admin);
         model.addAttribute("roleList", roleList);
-        return "adminManage/admin-edit";
+        return "admin-manage/admin-edit";
     }
 
     @GetMapping("add")
@@ -64,7 +64,7 @@ public class AdminManageController extends BaseController {
     public String add(Integer userid, Model model) {
         List<AdminRole> roleList = roleService.selectDisabledRole(0);
         model.addAttribute("roleList", roleList);
-        return "adminManage/admin-add";
+        return "admin-manage/admin-add";
     }
 
     @PostMapping("update")
@@ -79,7 +79,7 @@ public class AdminManageController extends BaseController {
     @GetMapping("delete")
     @ResponseBody
     @RequiresPermissions("admin:manage:delete")
-    public HttpResult delete(Integer userid, Model model) {
+    public HttpResult doDelete(Integer userid, Model model) {
         adminService.deleteByUserid(userid);
         return HttpResult.success();
     }

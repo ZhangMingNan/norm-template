@@ -17,7 +17,7 @@ import java.net.URLEncoder;
 /**
  * 作者: 张明楠 创建于 16/8/16.
  */
-public class BaseController  {
+public class BaseController {
     public String redirect(String target) {
         return String.format("redirect:%s", target);
     }
@@ -28,23 +28,25 @@ public class BaseController  {
     }
 
     protected String redirectAndClose(String id) {
-        return String.format("redirect:/msg/info.html?callback=close_dialog(\""+id+"\")");
+        return String.format("redirect:/msg/info.html?callback=close_dialog(\"" + id + "\")");
     }
 
     protected String encode(String string) {
-        if (StringUtils.isBlank(string)) return StringUtils.EMPTY;
+        if (StringUtils.isBlank(string)) {
+            return StringUtils.EMPTY;
+        }
         try {
             return URLEncoder.encode(string, Charsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return "";
+        return StringUtils.EMPTY;
     }
 
 
     @InitBinder
-    protected void initBinder(WebDataBinder webDataBinder){
-        webDataBinder.registerCustomEditor(SearchParams.class,new SearchPropertiesEditor());
+    protected void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.registerCustomEditor(SearchParams.class, new SearchPropertiesEditor());
     }
 
 }

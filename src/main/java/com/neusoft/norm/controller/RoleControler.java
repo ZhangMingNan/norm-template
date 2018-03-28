@@ -44,7 +44,7 @@ public class RoleControler extends BaseController {
         model.addAttribute("subnav", 1);
         List<AdminRole> roleList = roleService.selectDisabledRole(-1);
         model.addAttribute("roleList", roleList);
-        return "admin/role";
+        return "admin/role-list";
     }
 
     /**
@@ -110,7 +110,6 @@ public class RoleControler extends BaseController {
     @ResponseBody
     @RequiresPermissions("admin:role:delete")
     public HttpResult delete(Integer roleid) {
-
         roleService.deleteRoleById(roleid);
         return HttpResult.success();
     }

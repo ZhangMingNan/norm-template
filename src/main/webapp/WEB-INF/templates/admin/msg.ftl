@@ -30,13 +30,12 @@
     </div>
 </div>
 <script style="text/javascript">
-    function close_dialog(id) {
 
+    function close_dialog(id) {
         window.top.right.location.reload();window.top.art.dialog({id:id}).close();
     }
     //关闭对话框
     ${callback!""}
-
 </script>
 </body>
 </html>
