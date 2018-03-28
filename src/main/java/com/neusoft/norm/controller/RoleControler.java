@@ -124,8 +124,7 @@ public class RoleControler extends BaseController {
     @PostMapping("listorders")
     public String listorders(RoleListOrderVO vo) {
         adminService.sorting(vo.listorders);
-
-        return redirectToMsg("/admin/role", "排序成功!");
+        return redirectToMsg("/admin/role/list.html", "排序成功!");
     }
 
     @GetMapping("priv")
@@ -173,7 +172,7 @@ public class RoleControler extends BaseController {
     @GetMapping("changeStatus")
     public String changeStatus(AdminRole role) {
         roleService.updateRole(role);
-        return redirectToMsg("/admin/role", "设置成功!");
+        return redirectToMsg("/admin/role/list.html", "设置成功!");
     }
 
 }
